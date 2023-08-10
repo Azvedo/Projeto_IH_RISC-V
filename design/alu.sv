@@ -12,9 +12,6 @@ module alu#(
         output logic[DATA_WIDTH-1:0] ALUResult
         );
         
-        reg [DATA_WIDTH-1:0] immediate;
-        assign immediate = $signed(SrcB[31:20]);
-        
         always_comb
         begin
             case(Operation)
@@ -28,8 +25,6 @@ module alu#(
                     ALUResult = SrcA + SrcB;
             4'b0110:        // SUB
                     ALUResult = SrcA - SrcB;
-            4'b1100:	    // ADDI
-                    ALUResult = SrcA + immediate;
             4'b1000:        // Equal
                     ALUResult = (SrcA == SrcB) ? 1 : 0;
             default:
