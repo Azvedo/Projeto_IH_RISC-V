@@ -19,9 +19,13 @@ module alu#(
                     ALUResult = SrcA & SrcB;
             4'b0001:        // OR
                     ALUResult = SrcA | SrcB; 
+            4'b0011:        // SLT
+                    ALUResult = ($signed(SrcA) < $signed(SrcB)) ? 1 : 0;
             4'b0101:        // XOR
                     ALUResult = SrcA ^ SrcB; 
             4'b0010:        // ADD
+                    ALUResult = SrcA + SrcB;
+            4'b1100:        // ADDI
                     ALUResult = SrcA + SrcB;
             4'b0110:        // SUB
                     ALUResult = SrcA - SrcB;
