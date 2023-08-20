@@ -16,6 +16,7 @@ module ALUController (
       ((ALUOp == 2'b10) && (Funct3 == 3'b010) && (Funct7 == 7'b0000000))|| //R\I-SLT
       ((ALUOp == 2'b10) && (Funct3 == 3'b001) && (Funct7 == 7'b0000000))|| //SLLI
       ((ALUOp == 2'b10) && (Funct3 == 3'b101) && (Funct7 == 7'b0000000))|| //SRLI
+      ((ALUOp == 2'b01) && (Funct3 == 3'b101)) || //BGE
       ((ALUOp == 2'b10) && (Funct3 == 3'b010)); //R\I-SLTI
 
 
@@ -26,6 +27,9 @@ module ALUController (
       ((ALUOp == 2'b10) && (Funct3 == 3'b000) && (Funct7 == 7'b0000000))||  // R\I-add
       ((ALUOp == 2'b10) && (Funct3 == 3'b000) && (Funct7 == 7'b0100000))||  // R\I-SUB
       ((ALUOp == 2'b10) && (Funct3 == 3'b010) && (Funct7 == 7'b0000000))|| //R\I-SLT
+      ((ALUOp == 2'b01) && (Funct3 == 3'b001)) || //BNE
+      ((ALUOp == 2'b01) && (Funct3 == 3'b100)) || //BLT
+      ((ALUOp == 2'b01) && (Funct3 == 3'b101)) || //BGE
       ((ALUOp == 2'b10) && (Funct3 == 3'b010)) ; //R\I-SLTI
 
   assign Operation[2] = ((ALUOp == 2'b01) && (Funct3 == 3'b001))|| //BNE
@@ -33,6 +37,7 @@ module ALUController (
       ((ALUOp == 2'b10) && (Funct3 == 3'b000) && (Funct7 != 7'b0100000) && (Funct7 != 7'b0000000))||  // ADDI
       ((ALUOp == 2'b10) && (Funct3 == 3'b000) && (Funct7 == 7'b0100000))||  // R\I-SUB
       ((ALUOp == 2'b10) && (Funct3 == 3'b100) && (Funct7 == 7'b0000000))|| //R\I-XOR
+      ((ALUOp == 2'b01) && (Funct3 == 3'b001)) || //BNE
       ((ALUOp == 2'b10) && (Funct3 == 3'b101) && (Funct7 == 7'b0000000))|| //R\I-SRLI
       ((ALUOp == 2'b10) && (Funct3 == 3'b010) && (Funct7 == 7'b0000000)); //R/I-SLT
 
