@@ -40,6 +40,13 @@ module alu#(
                     ALUResult = SrcA >> SrcB;
             4'b0100:        // SRAI
                     ALUResult = $signed(SrcA) >>> SrcB;
+        //operacoes para os branches
+                4'b1110:        //Not Equal 
+                    ALUResult = (SrcA != SrcB) ? 1 : 0;  
+                4'b1010:        //Less Than 
+                    ALUResult = (SrcA < SrcB) ? 1 : 0;
+                4'b1011:        //Greater or Equal
+                    ALUResult = (SrcA >= SrcB) ? 1 : 0;
             default:
                     ALUResult = 0;
             endcase
