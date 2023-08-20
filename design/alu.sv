@@ -29,17 +29,17 @@ module alu#(
             4'b0010:        // ADD
                     ALUResult = $signed(SrcA) + $signed(SrcB);
             4'b1100:        // ADDI
-                    ALUResult = $signed(SrcA) + $signed(SrcB);
+                    ALUResult = $signed(SrcA) + SrcB;
             4'b0110:        // SUB
                     ALUResult = $signed(SrcA) - $signed(SrcB);
             4'b1000:        // Equal
                     ALUResult = (SrcA == SrcB) ? 1 : 0;
-            4'b1001:        //SLLI
-                    ALUResult = (SrcA << SrcB);
-            4'b1101:        //SRLI
-                    ALUResult = (SrcA >> SrcB);
-            4'b0100:        //SRAI
-                    ALUResult = (SrcA >>> SrcB);
+            4'b1001:        // SLLI
+                    ALUResult = SrcA << SrcB;
+            4'b1101:        // SRLI
+                    ALUResult = SrcA >> SrcB;
+            4'b0100:        // SRAI
+                    ALUResult = $signed(SrcA) >>> SrcB;
             default:
                     ALUResult = 0;
             endcase
