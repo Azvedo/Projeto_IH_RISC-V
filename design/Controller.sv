@@ -22,7 +22,7 @@ module Controller (
     output logic RWSel
 );
 
-  logic [6:0] R_TYPE, LW, SW, BR, I_TYPE, U_TYPE, J_TYPE;
+  logic [6:0] R_TYPE, LW, SW, BR, I_TYPE, U_TYPE, J_TYPE, LUI_TYPE;
 
   assign R_TYPE = 7'b0110011;  //add,and
   assign I_TYPE = 7'b0010011; //I_type
@@ -31,14 +31,15 @@ module Controller (
   assign BR = 7'b1100011;  //beq,bne,blt
   assign J_TYPE = 7'b1101111; //jal?
   assign U_TYPE = 7'b1100111; //jalr, lui
+  assign LUI_TYPE = 7'b0110111;
 
-  assign ALUSrc = (Opcode == LW || Opcode == SW || Opcode == I_TYPE || Opcode == U_TYPE);
+  assign ALUSrc = (Opcode == LW || Opcode == SW || Opcode == I_TYPE || Opcode == LUI_TYPE || Opcode == U_TYPE);
   assign MemtoReg = (Opcode == LW);
-  assign RegWrite = (Opcode == R_TYPE || Opcode == LW || Opcode == I_TYPE || Opcode == J_TYPE || Opcode == U_TYPE);
+  assign RegWrite = (Opcode == R_TYPE || Opcode == LW || Opcode == I_TYPE || Opcode == J_TYPE || Opcode == U_TYPE || Opcode == LUI_TYPE);
   assign MemRead = (Opcode == LW);
   assign MemWrite = (Opcode == SW);
-  assign ALUOp[0] = (Opcode == BR);
-  assign ALUOp[1] = (Opcode == R_TYPE || Opcode == I_TYPE || Opcode == U_TYPE);
+  assign ALUOp[0] = (Opcode == BR || Opcode == LUI_TYPE);
+  assign ALUOp[1] = (Opcode == R_TYPE || Opcode == I_TYPE ||  Opcode == LUI_TYPE ||  Opcode == U_TYPE);
   assign Branch = (Opcode == BR);
   assign jump = (Opcode == J_TYPE || Opcode == U_TYPE);
   assign jalrSel = (Opcode == U_TYPE);
