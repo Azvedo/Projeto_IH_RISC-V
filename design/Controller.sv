@@ -18,6 +18,7 @@ module Controller (
     output logic [1:0] ALUOp,  //00: LW/SW; 01:Branch; 10: Rtype
     output logic Branch,  //0: branch is not taken; 1: branch is taken
     output logic jump,
+    output logic jalrSel,
     output logic RWSel
 );
 
@@ -31,14 +32,15 @@ module Controller (
   assign J_TYPE = 7'b1101111; //jal?
   assign U_TYPE = 7'b1100111; //jalr, lui
 
-  assign ALUSrc = (Opcode == LW || Opcode == SW || Opcode == I_TYPE);
+  assign ALUSrc = (Opcode == LW || Opcode == SW || Opcode == I_TYPE || Opcode == U_TYPE);
   assign MemtoReg = (Opcode == LW);
   assign RegWrite = (Opcode == R_TYPE || Opcode == LW || Opcode == I_TYPE || Opcode == J_TYPE || Opcode == U_TYPE);
   assign MemRead = (Opcode == LW);
   assign MemWrite = (Opcode == SW);
   assign ALUOp[0] = (Opcode == BR);
-  assign ALUOp[1] = (Opcode == R_TYPE || Opcode == I_TYPE);
+  assign ALUOp[1] = (Opcode == R_TYPE || Opcode == I_TYPE || Opcode == U_TYPE);
   assign Branch = (Opcode == BR);
-  assign jump = (Opcode == J_TYPE);
+  assign jump = (Opcode == J_TYPE || Opcode == U_TYPE);
+  assign jalrSel = (Opcode == U_TYPE);
   assign RWSel = (Opcode == J_TYPE || Opcode == U_TYPE);
 endmodule
