@@ -35,7 +35,8 @@ module riscv #(
       MemWrite,
       ALUop,
       Branch,
-      jump
+      jump,
+      RWSel
   );
 
   ALUController ac (
@@ -55,6 +56,7 @@ module riscv #(
       MemRead,
       Branch,
       jump,
+      RWSel,
       ALUop,
       Operation,
       opcode,

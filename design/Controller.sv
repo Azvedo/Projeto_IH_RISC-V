@@ -4,7 +4,7 @@ module Controller (
     //Input
     input logic [6:0] Opcode,
     //7-bit opcode field from the instruction
-
+  
     //Outputs
     output logic ALUSrc,
     //0: The second ALU operand comes from the second register file output (Read data 2); 
@@ -17,7 +17,8 @@ module Controller (
     output logic MemWrite, //Data memory contents designated by the address input are replaced by the value on the Write data input.
     output logic [1:0] ALUOp,  //00: LW/SW; 01:Branch; 10: Rtype
     output logic Branch,  //0: branch is not taken; 1: branch is taken
-    output logic jump
+    output logic jump,
+    output logic RWSel
 );
 
   logic [6:0] R_TYPE, LW, SW, BR, I_TYPE, U_TYPE, J_TYPE;
@@ -32,11 +33,12 @@ module Controller (
 
   assign ALUSrc = (Opcode == LW || Opcode == SW || Opcode == I_TYPE);
   assign MemtoReg = (Opcode == LW);
-  assign RegWrite = (Opcode == R_TYPE || Opcode == LW || Opcode == I_TYPE);
+  assign RegWrite = (Opcode == R_TYPE || Opcode == LW || Opcode == I_TYPE || Opcode == J_TYPE || Opcode == U_TYPE);
   assign MemRead = (Opcode == LW);
   assign MemWrite = (Opcode == SW);
   assign ALUOp[0] = (Opcode == BR);
   assign ALUOp[1] = (Opcode == R_TYPE || Opcode == I_TYPE);
   assign Branch = (Opcode == BR);
   assign jump = (Opcode == J_TYPE);
+  assign RWSel = (Opcode == J_TYPE || Opcode == U_TYPE);
 endmodule
