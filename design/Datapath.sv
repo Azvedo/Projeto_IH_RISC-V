@@ -21,6 +21,7 @@ module Datapath #(
     jump, // Branch Enable
     jalrSel,
     RWSel,
+    halt,
     input  logic [          1:0] ALUOp,
     input  logic [ALU_CC_W -1:0] ALU_CC,         // ALU Control Code ( input of the ALU )
     output logic [          6:0] opcode,
@@ -64,7 +65,8 @@ module Datapath #(
   adder #(9) pcadd (
       PC,
       9'b100,
-      PCPlus4
+      PCPlus4,
+      halt
   );
   mux2 #(9) pcmux (
       PCPlus4,
