@@ -70,11 +70,6 @@ A entrega consiste no link do fork do repositório no GitHub, contendo o código
 
 O relatório não deve ser extenso, mas deve conter todas as informações necessárias para a avaliação do projeto.
 
-## 📝 Avaliação
-
-A avaliação do projeto será baseada na implementação correta das instruções, nos testes realizados e no funcionamento adequado do processador.
-
-- O projeto será submetido a casos de teste para verificar seu funcionamento, mas o processo de avaliação também levará em conta a qualidade do código e do relatório.
 
 ## 📁 Estrutura do repositório
 O repositório está organizado da seguinte forma:
