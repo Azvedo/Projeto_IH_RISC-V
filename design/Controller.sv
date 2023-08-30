@@ -33,7 +33,7 @@ module Controller (
   assign J_TYPE = 7'b1101111; //jal?
   assign U_TYPE = 7'b1100111; //jalr, lui
   assign LUI_TYPE = 7'b0110111;
-  assign Z_TYPE = 7'b0000000;
+  assign Z_TYPE = 7'b0000001;
 
   assign ALUSrc = (Opcode == LW || Opcode == SW || Opcode == I_TYPE || Opcode == LUI_TYPE || Opcode == U_TYPE);
   assign MemtoReg = (Opcode == LW);
