@@ -23,7 +23,7 @@ module Controller (
     output logic halt
 );
 
-  logic [6:0] R_TYPE, LW, SW, BR, I_TYPE, U_TYPE, J_TYPE, LUI_TYPE;
+    logic [6:0] R_TYPE, LW, SW, BR, I_TYPE, U_TYPE, J_TYPE, LUI_TYPE, Z_TYPE;
 
   assign R_TYPE = 7'b0110011;  //add,and
   assign I_TYPE = 7'b0010011; //I_type
